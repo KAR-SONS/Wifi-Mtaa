@@ -3,6 +3,7 @@
 import { useState } from "react";
 import BusinessInfoStep from "./business-info-step";
 import HotspotStep from "./hotspot-step";
+import PaymentStep from "./payment-step";
 import type { BusinessType } from "@/app/onboarding/actions";
 
 type InitialBusiness = {
@@ -87,28 +88,8 @@ export default function SetupWizard({ initialBusiness }: { initialBusiness: Init
             onBack={() => setStep(1)}
           />
         )}
-        {step === 3 && <PlaceholderStep title="Payment" onBack={() => setStep(2)} />}
+        {step === 3 && <PaymentStep onBack={() => setStep(2)} />}
       </div>
     </main>
-  );
-}
-
-// Step 3 (Paystack payment) is built next — this keeps the wizard navigable
-// in the meantime.
-function PlaceholderStep({ title, onBack }: { title: string; onBack: () => void }) {
-  return (
-    <div>
-      <h2 className="text-2xl font-bold text-slate-900">{title}</h2>
-      <p className="mt-1 text-slate-500">This step is coming next.</p>
-      <div className="mt-8 flex justify-between border-t border-slate-100 pt-6">
-        <button
-          type="button"
-          onClick={onBack}
-          className="rounded-lg border border-slate-200 px-5 py-2.5 font-semibold text-slate-600 transition hover:bg-slate-50"
-        >
-          ← Previous
-        </button>
-      </div>
-    </div>
   );
 }
