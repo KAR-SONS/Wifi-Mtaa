@@ -1,31 +1,8 @@
 import Link from "next/link";
-
-const steps = [
-  {
-    n: 1,
-    emoji: "📝",
-    title: "Sign Up",
-    desc: "Create your account in seconds",
-  },
-  {
-    n: 2,
-    emoji: "🏢",
-    title: "Setup Business",
-    desc: "Add business details and create hotspot",
-  },
-  {
-    n: 3,
-    emoji: "📦",
-    title: "Create Packages",
-    desc: "Set pricing for your Hotspot packages",
-  },
-  {
-    n: 4,
-    emoji: "💰",
-    title: "Start Earning",
-    desc: "Manage your business and earn money",
-  },
-];
+import HowItWorks from "@/components/home/how-it-works";
+import HowUsersConnect from "@/components/home/how-users-connect";
+import HotspotDetails from "@/components/home/hotspot-details";
+import Testimonials from "@/components/home/testimonials";
 
 const perks = [
   {
@@ -118,23 +95,10 @@ export default function HomePage() {
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="bg-slate-50 py-16">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <h2 className="text-center text-3xl font-bold text-slate-900">How It Works</h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s) => (
-              <div key={s.n} className="rounded-xl border border-slate-200 bg-white p-6">
-                <div className="text-2xl">{s.emoji}</div>
-                <div className="mt-4 flex h-7 w-7 items-center justify-center rounded-full bg-brand-500 text-sm font-bold text-white">
-                  {s.n}
-                </div>
-                <h3 className="mt-3 font-semibold text-slate-900">{s.title}</h3>
-                <p className="mt-1 text-sm text-slate-500">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HowItWorks />
+      <HowUsersConnect />
+      <HotspotDetails />
+      <Testimonials />
 
       {/* Why choose us */}
       <section className="py-16">
@@ -198,30 +162,6 @@ export default function HomePage() {
               <span className="font-bold">Hotspot Mtaani</span>
             </div>
             <p className="mt-3 text-sm">Earn from your Mobile Data connection</p>
-          </div>
-          <div>
-            <h4 className="font-semibold text-white">Product</h4>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li>Features</li>
-              <li>Pricing</li>
-              <li>Security</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold text-white">Company</h4>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li>About</li>
-              <li>Blog</li>
-              <li>Contact</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold text-white">Legal</h4>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li>Privacy</li>
-              <li>Terms</li>
-              <li>Support</li>
-            </ul>
           </div>
         </div>
         <p className="mt-10 text-center text-xs text-slate-500">
