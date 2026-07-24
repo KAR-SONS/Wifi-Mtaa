@@ -16,14 +16,6 @@ const nextConfig = {
   // native deps (below) isn't enough on its own — we also need to replace
   // the `__dirname` identifier itself for the edge compilation.
   webpack: (config, { nextRuntime, webpack }) => {
-    if (nextRuntime === "edge") {
-      config.plugins.push(
-        new webpack.DefinePlugin({
-          __dirname: JSON.stringify("/"),
-        })
-      );
-    }
-
     config.resolve.alias = {
       ...config.resolve.alias,
       bufferutil: false,
