@@ -7,11 +7,23 @@ const nextConfig = {
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
     ],
   },
-  // Supabase's client pulls in `ws` (for Realtime), which references Node-only
-  // globals like __dirname via its optional native deps. Those aren't needed
-  // for auth and break the Edge Runtime bundle used by middleware.ts — so 
-  // tell webpack to skip them.
-  webpack: (config) => {
+  // Supabase's client (via its Realtime dependency chain) contains code
+  // that references the literal `__dirname` identifier — normal webpack
+  // builds silently replace this with a real path, but Next's Edge Runtime
+  // (used for middleware.ts) deliberately does NOT polyfill it, since
+  // there's no real filesystem there. That's why the build succeeds but it
+  // throws "__dirname is not defined" at runtime. Aliasing `ws`'s optional
+  // native deps (below) isn't enough on its own — we also need to replace
+  // the `__dirname` identifier itself for the edge compilation.
+  webpack: (config, { nextRuntime, webpack }) => {
+    if (nextRuntime === "edge") {
+      config.plugins.push(
+        new webpack.DefinePlugin({
+          __dirname: JSON.stringify("/"),
+        })
+      );
+    }
+
     config.resolve.alias = {
       ...config.resolve.alias,
       bufferutil: false,
